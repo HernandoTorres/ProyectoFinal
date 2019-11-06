@@ -1,0 +1,646 @@
+Proyecto Final Programación II
+Hernando Salamanca y Jimmy Rueda
+
+
+////////////
+
+  
+import javax.swing.*;
+import java.awt.*;
+
+public class Principal{
+
+         IMusic songs1;
+     
+	public static void main(String[] args) {
+   
+            Principal can = new Principal();
+            can.ring();
+               
+		MyWindow window = new MyWindow();
+		window.setVisible(true);
+		window.setPreferredSize(new Dimension(1000,800));
+		window.pack();
+                window.setLocationRelativeTo(null);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
+ 
+	}
+        
+        public void ring(){
+            
+            songs1 = new Song1();
+            songs1.songs("/Music/Away.wav");
+            
+            }
+ 
+}
+
+
+//////////////
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.ImageIcon;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+class MyWindow extends JFrame implements ActionListener{
+    
+        JLabel jl1,jl2,jl3,jl4,jl5;  
+        JButton bt1,bt2,btr,btc,bto,btn,btb;
+        JTextField t1;
+        OutPrint txt;
+        JPanel jp1, jp2, jp3, jp4, jp5, jp6, jp7;
+        
+        //catracteristicas
+        MyButton r1, r2, r3;
+        MyButton c1, c2, c3;
+        MyButton o1, o2, o3;
+        MyButton n1, n2, n3;
+        MyButton b1, b2, b3;
+        
+        //variables
+           
+     String nombre;
+     ArrayList delincuentes = new ArrayList();
+        
+        
+	public MyWindow(){
+	super("Morfología de un sospechoso o criminal.");
+        iniciarCompon();	
+	}
+        
+        private void iniciarCompon(){
+
+            //paneles
+        
+        jp1 = new JPanel(); // creamos el panel
+        jp1.setBounds(0, 0, 500, 400);
+        jp1.setLayout(null);
+        jp1.setBackground(Color.LIGHT_GRAY);
+        jp1.setVisible(false);
+        this.getContentPane().add(jp1);//Agregamos el panel a la ventana
+        
+        jp2 = new JPanel(); // creamos el panel
+        jp2.setBounds(0, 400, 500, 400);
+        jp2.setLayout(null);
+        jp2.setVisible(true);
+        this.getContentPane().add(jp2);//Agregamos el panel a la ventana
+        
+        jp3 = new JPanel(); // creamos el panel
+        jp3.setBounds(500, 0, 500, 800);
+        jp3.setLayout(null);
+        jp3.setBackground(Color.GRAY);
+        jp3.setVisible(true);
+        this.getContentPane().add(jp3);//Agregamos el panel a la ventana
+        
+        jp4 = new JPanel(); // creamos el panel
+        jp4.setBounds(0, 0, 500, 400);
+        jp4.setLayout(null);
+        jp4.setBackground(Color.LIGHT_GRAY);
+        jp4.setVisible(false);
+        this.getContentPane().add(jp4);//Agregamos el panel a la ventana
+      
+        jp5 = new JPanel(); // creamos el panel
+        jp5.setBounds(0, 0, 500, 400);
+        jp5.setLayout(null);
+        jp5.setBackground(Color.LIGHT_GRAY);
+        jp5.setVisible(false);
+        this.getContentPane().add(jp5);//Agregamos el panel a la ventana
+      
+        jp6 = new JPanel(); // creamos el panel
+        jp6.setBounds(0, 0, 500, 400);
+        jp6.setLayout(null);
+        jp6.setBackground(Color.LIGHT_GRAY);
+        jp6.setVisible(false);
+        this.getContentPane().add(jp6);//Agregamos el panel a la ventana
+              
+        jp7 = new JPanel(); // creamos el panel
+        jp7.setBounds(0, 0, 500, 400);
+        jp7.setLayout(null);
+        jp7.setBackground(Color.LIGHT_GRAY);
+        jp7.setVisible(false);
+        this.getContentPane().add(jp7);//Agregamos el panel a la ventana
+        
+        //panel 3
+        jl2 = new JLabel("BOCETA AL SOSPECHOSO...");       
+        jl2.setBounds(130,30,300,30);
+        jl2.setFont(new Font("arial",Font.BOLD,18));
+        jl2.setForeground(Color.WHITE);
+        jp3.add(jl2);
+        
+        jl5 = new JLabel("Seleccione las partes más parecidas !!!");       
+        jl5.setBounds(120,500,300,30);
+        jl5.setFont(new Font("arial",Font.BOLD,14));
+        jl5.setForeground(Color.WHITE);
+        jp3.add(jl5);
+
+        bt1 = new JButton("Registrar");
+        bt1.setBounds(190,560,100,30);
+        bt1.setBackground(Color.WHITE);
+        jp3.add(bt1);
+        
+        bt2 = new JButton("Salida");
+        bt2.setBounds(190,610,100,30);
+        bt2.setBackground(Color.WHITE);
+        jp3.add(bt2);
+        
+        //panel 2
+        jl1 = new JLabel ("MORFOLOGÍA CRIMINAL !!!");       
+        jl1.setBounds(105,10,270,40);
+        jl1.setFont(new Font("arial",Font.BOLD,20));
+        jl1.setForeground(Color.red);
+        jp2.add(jl1);
+         
+        jl3 = new JLabel("CC y Nombre o alias del sospechoso: ");       
+        jl3.setBounds(120,60,240,30);
+        jl3.setFont(new Font("arial",Font.BOLD,13));
+        jp2.add(jl3);     
+
+        t1 = new JTextField();       
+        t1.setBounds(140,90,200,30);
+        jp2.add(t1);  
+                             
+        btr = new JButton("Tipos de Rostro");
+        btr.setBounds(170,160,140,30);
+        btr.setBackground(Color.GRAY);
+        jp2.add(btr);
+        
+        btc = new JButton("Tipos de Cabello");
+        btc.setBounds(170,195,140,30);
+        btc.setBackground(Color.GRAY);
+        jp2.add(btc);
+        
+        bto = new JButton("Tipos de Ojos");
+        bto.setBounds(170,230,140,30);
+        bto.setBackground(Color.GRAY);
+        jp2.add(bto);
+        
+        btn = new JButton("Tipos de Narices");
+        btn.setBounds(170,265,140,30);
+        btn.setBackground(Color.GRAY);
+        jp2.add(btn);
+        
+        btb = new JButton("Tipos de Bocas");
+        btb.setBounds(170,300,140,30);
+        btb.setBackground(Color.GRAY);
+        jp2.add(btb);
+    
+        carateristicas();
+  
+        //Escuchar botones
+        bt1.addActionListener(this);  
+        bt2.addActionListener(this); 
+        
+        r1.addActionListener(this); 
+        r2.addActionListener(this);
+        r3.addActionListener(this);
+        c1.addActionListener(this); 
+        c2.addActionListener(this);
+        c3.addActionListener(this);
+        o1.addActionListener(this); 
+        o2.addActionListener(this);
+        o3.addActionListener(this);
+        n1.addActionListener(this); 
+        n2.addActionListener(this);
+        n3.addActionListener(this);
+        b1.addActionListener(this); 
+        b2.addActionListener(this); 
+        b3.addActionListener(this); 
+         
+        btr.addActionListener(this);
+        btc.addActionListener(this);
+        bto.addActionListener(this);
+        btn.addActionListener(this);
+        btb.addActionListener(this);
+        
+        }
+        
+        public void carateristicas(){
+             //Panel 1: rostros
+        jl3 = new JLabel("PALETA DE OPCIONES DE ROSTROS");       
+        jl3.setBounds(90,20,330,30);
+        jl3.setFont(new Font("arial",Font.BOLD,18));
+        jl3.setForeground(Color.WHITE);
+        jp1.add(jl3);
+        
+        r1 = new MyButton("r1");
+	r1.setBounds(20, 70, 146, 200);
+        ImageIcon ro1 = new ImageIcon(getClass().getResource("/Image/r1.png"));
+        r1.setIcon(ro1);
+        jp1.add(r1);
+        
+        r2 = new MyButton("r2");
+	r2.setBounds(170, 70, 138, 200);
+        ImageIcon ro2 = new ImageIcon(getClass().getResource("/Image/r2.png"));
+        r2.setIcon(ro2);
+        jp1.add(r2);
+        
+        r3 = new MyButton("r3");
+	r3.setBounds(310, 70, 138, 200);
+        ImageIcon ro3 = new ImageIcon(getClass().getResource("/Image/r3.png"));
+        r3.setIcon(ro3);
+        jp1.add(r3);
+        
+        
+        //Panel 4: pelos
+        jl3 = new JLabel("PALETA DE OPCIONES DE CABELLO");       
+        jl3.setBounds(90,20,330,30);
+        jl3.setFont(new Font("arial",Font.BOLD,18));
+        jl3.setForeground(Color.WHITE);
+        jp4.add(jl3);
+        
+        c1 = new MyButton("c1");
+	c1.setBounds(20, 110, 160, 110);
+        ImageIcon ca1 = new ImageIcon(getClass().getResource("/Image/c1.png"));
+        c1.setIcon(ca1);
+        jp4.add(c1);
+ 
+        c2 = new MyButton("c2");
+	c2.setBounds(170, 110, 170, 220);
+        ImageIcon ca2 = new ImageIcon(getClass().getResource("/Image/c2.png"));
+        c2.setIcon(ca2);
+        jp4.add(c2);
+        
+        c3 = new MyButton("c3");
+	c3.setBounds(340, 60, 170, 220);
+        ImageIcon ca3 = new ImageIcon(getClass().getResource("/Image/c3.png"));
+        c3.setIcon(ca3);
+        jp4.add(c3);
+        
+        //Panel 5: ojos
+        jl3 = new JLabel("PALETA DE OPCIONES DE OJOS");       
+        jl3.setBounds(90,20,330,30);
+        jl3.setFont(new Font("arial",Font.BOLD,18));
+        jl3.setForeground(Color.WHITE);
+        jp5.add(jl3);
+
+        o1 = new MyButton("o1");
+	o1.setBounds(10, 70, 113, 40);
+        ImageIcon oj1 = new ImageIcon(getClass().getResource("/Image/o1.png"));
+        o1.setIcon(oj1);
+        jp5.add(o1);
+ 
+        o2 = new MyButton("o2");
+	o2.setBounds(170, 70, 115, 40);
+        ImageIcon oj2 = new ImageIcon(getClass().getResource("/Image/o2.png"));
+        o2.setIcon(oj2);
+        jp5.add(o2);
+        
+        o3 = new MyButton("o3");
+	o3.setBounds(330, 70, 115, 40);
+        ImageIcon oj3 = new ImageIcon(getClass().getResource("/Image/o3.png"));
+        o3.setIcon(oj3);
+        jp5.add(o3);
+        
+        //Panel 6: nariz
+        jl3 = new JLabel("PALETA DE OPCIONES DE NARICEZ ");       
+        jl3.setBounds(90,20,330,30);
+        jl3.setFont(new Font("arial",Font.BOLD,18));
+        jl3.setForeground(Color.WHITE);
+        jp6.add(jl3);
+        
+        n1 = new MyButton("n1");
+	n1.setBounds(30, 70, 70, 60);
+        ImageIcon na1 = new ImageIcon(getClass().getResource("/Image/n1.png"));
+        n1.setIcon(na1);
+        jp6.add(n1);
+        
+        n2 = new MyButton("n2");
+	n2.setBounds(150, 70, 70, 60);
+        ImageIcon na2 = new ImageIcon(getClass().getResource("/Image/n2.png"));
+        n2.setIcon(na2);
+        jp6.add(n2);
+        
+        n3 = new MyButton("n3");
+	n3.setBounds(290, 70, 70, 60);
+        ImageIcon na3 = new ImageIcon(getClass().getResource("/Image/n3.png"));
+        n3.setIcon(na3);
+        jp6.add(n3);
+
+                
+        //Panel 7: boca
+        jl3 = new JLabel("PALETA DE OPCIONES DE BOCAS");       
+        jl3.setBounds(90,20,330,30);
+        jl3.setFont(new Font("arial",Font.BOLD,18));
+        jl3.setForeground(Color.WHITE);
+        jp7.add(jl3);
+        
+        b1 = new MyButton("b1");
+	b1.setBounds(10, 70, 80, 80);
+        ImageIcon bo1 = new ImageIcon(getClass().getResource("/Image/b1.png"));
+        b1.setIcon(bo1);
+        jp7.add(b1);
+        
+        b2 = new MyButton("b2");
+	b2.setBounds(120, 70, 80, 80);
+        ImageIcon bo2 = new ImageIcon(getClass().getResource("/Image/b2.png"));
+        b2.setIcon(bo2);
+        jp7.add(b2);
+                
+        b3 = new MyButton("b3");
+	b3.setBounds(240, 70, 80, 80);
+        ImageIcon bo3 = new ImageIcon(getClass().getResource("/Image/b3.png"));
+        b3.setIcon(bo3);
+        jp7.add(b3);
+        }
+
+   
+        
+        public void actionPerformed (ActionEvent e) {
+            
+        	            
+	            String nameButton = e.getActionCommand();
+	            
+	                if ("Registrar".equals(nameButton)){
+	                	
+                          JOptionPane.showMessageDialog(null, "Descarga de archivo de texto realizada");
+                
+                           nombre = t1.getText();
+                           //imagen = createImagen(panel1);
+                           delincuentes.add(new Listas(nombre));
+                           
+                           txt = new OutPrint();
+	                   txt.output(nombre);
+                           t1.setText("");   
+
+	                   }
+                        if ("Salida".equals(nameButton)){
+	                	
+                         Iterator it = delincuentes.iterator();
+                          //verifica si existe otro elemento con el método hasNext()
+                          while ( it.hasNext() ) { 
+                          Object objeto = it.next(); 
+                          Listas sospechozo = (Listas)objeto; 
+                          JOptionPane.showMessageDialog(null, sospechozo); 
+                          }
+                          System.exit(0);
+	                	
+	                  
+                        }
+                        if ("r1".equals(nameButton)){
+	                	
+                              jp3.add(r1);  
+	                  }    
+                        if ("r2".equals(nameButton)){
+	                	
+                              jp3.add(r2);   
+	                  } 
+                        if ("r3".equals(nameButton)){
+	                	
+                              jp3.add(r3);   
+	                  } 
+                        if ("c1".equals(nameButton)){
+	                	
+                              jp3.add(c1);   
+	                  } 
+                        if ("c2".equals(nameButton)){
+	                	
+                              jp3.add(c2);   
+	                  } 
+                        if ("c3".equals(nameButton)){
+	                	
+                              jp3.add(c3);   
+	                  } 
+                        if ("o1".equals(nameButton)){
+	                	
+                              jp3.add(o1);   
+	                  }
+                        if ("o2".equals(nameButton)){
+	                	
+                              jp3.add(o2);   
+	                  } 
+                        if ("o3".equals(nameButton)){
+	                	
+                              jp3.add(o3);   
+	                  } 
+                        if ("n1".equals(nameButton)){
+	                	
+                              jp3.add(n1);   
+	                  } 
+                        
+                        if ("n2".equals(nameButton)){
+	                	
+                              jp3.add(n2);   
+	                  }
+                        if ("n3".equals(nameButton)){
+	                	
+                              jp3.add(n3);   
+	                  }
+                        if ("b1".equals(nameButton)){
+	                	
+                              jp3.add(b1);   
+	                  } 
+                        if ("b2".equals(nameButton)){
+	                	
+                              jp3.add(b2);   
+	                  } 
+                        if ("b3".equals(nameButton)){
+	                	
+                              jp3.add(b3);   
+	                  } 
+	                 if ("Tipos de Rostro".equals(nameButton)){
+	                	
+                              jp1.setVisible(true);
+                              jp4.setVisible(false);
+                              jp5.setVisible(false);
+                              jp6.setVisible(false);
+                              jp7.setVisible(false);
+	                  }   
+                         if ("Tipos de Cabello".equals(nameButton)){
+	                	
+                              jp1.setVisible(false);
+                              jp4.setVisible(true);
+                              jp5.setVisible(false);
+                              jp6.setVisible(false);
+                              jp7.setVisible(false);
+	                  } 
+                         if ("Tipos de Ojos".equals(nameButton)){
+	                	
+                              jp1.setVisible(false);
+                              jp4.setVisible(false);
+                              jp5.setVisible(true);
+                              jp6.setVisible(false);
+                              jp7.setVisible(false);
+	                  } 
+                         if ("Tipos de Narices".equals(nameButton)){
+	                	
+                              jp1.setVisible(false);
+                              jp4.setVisible(false);
+                              jp5.setVisible(false);
+                              jp6.setVisible(true);
+                              jp7.setVisible(false);
+	                  } 
+                         if ("Tipos de Bocas".equals(nameButton)){
+	                	
+                              jp1.setVisible(false);
+                              jp4.setVisible(false);
+                              jp5.setVisible(false);
+                              jp6.setVisible(false);
+                              jp7.setVisible(true);
+	                  } 
+                         
+        }
+
+}
+
+
+////////////
+
+
+
+import java.io.*;
+public class OutPrint {
+    
+    public void output(String nombre){
+          try {
+          FileWriter Archivo = new FileWriter("C:\\Users\\Hernando Torres\\Desktop\\proyecto\\hernando.txt");
+          PrintWriter pw = new PrintWriter(Archivo);
+          pw.println("CC y Nombre o alias del sospechoso: "+nombre);
+          pw.close();
+          
+          
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+}
+
+
+//////////////////
+
+
+import java.awt.image.BufferedImage;
+
+public class Listas {
+    
+    String codigo;
+
+    public Listas() {
+    }
+
+    public Listas(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    @Override
+    public String toString() {
+        return "La cédula y el nombre del sospechoso son: "+getCodigo();
+    }    
+}
+
+
+///////////////////////
+
+
+import java.applet.AudioClip;
+public class Song1 implements IMusic{
+AudioClip sound;
+    @Override
+    public void songs(String ruta) {
+        try{
+        sound = java.applet.Applet.newAudioClip(getClass().getResource(ruta));
+        sound.play();
+        }catch(Exception e){ 
+        }
+    }
+}
+
+
+////////////
+
+public interface IMusic {
+     public void songs(String ruta);
+}
+
+//////////////
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+import javax.swing.JLabel;
+
+
+public class MyLabel extends JLabel implements MouseMotionListener{
+	
+	
+	public MyLabel(String text){
+	super.setText(text);
+	addMouseMotionListener(this);
+
+	}
+
+	public void mouseDragged(MouseEvent me) {
+	setLocation(
+	this.getX() + me.getX() - this.getWidth() / 2,
+ 	this.getY() + me.getY() - this.getHeight() / 2
+	);
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+}
+
+
+///////////////////
+
+
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+import javax.swing.JButton;
+
+class MyButton extends JButton implements MouseMotionListener{	
+	
+	public MyButton(String text){
+            super.setText(text);
+	
+            setContentAreaFilled(false);
+		
+            Dimension tamano = getPreferredSize();
+	    tamano.width = tamano.height = Math.max( tamano.width,tamano.height );
+	    setPreferredSize( tamano );
+	    
+            addMouseMotionListener(this);
+
+	}
+
+	protected void paintBorder( Graphics g ) {
+       /* g.setColor( getForeground() );
+        g.drawOval( 0,0,getSize().width-1,getSize().height-1 );*/        
+        }
+    
+
+	public void mouseDragged(MouseEvent me) {
+
+	setLocation(
+	this.getX() + me.getX() - this.getWidth() / 2,
+	this.getY() + me.getY() - this.getHeight() / 2
+	);
+	}
+
+
+public void mouseMoved(MouseEvent mme) {
+
+}
+}
